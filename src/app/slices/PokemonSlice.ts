@@ -1,5 +1,5 @@
 import { getPokemonData } from './../reducers/getPokemonData';
-import { PokemonInitialStateType,  generatedPokemonType } from './../../utils/Types';
+import { PokemonInitialStateType,  generatedPokemonType } from '../../utils/types';
 import { createSlice } from '@reduxjs/toolkit';
 import { getInitialPokemonData } from '../reducers/getInitialPokemonData';
 

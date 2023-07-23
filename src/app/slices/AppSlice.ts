@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { AppTypeInitialState } from './../../utils/Types';
+import { AppTypeInitialState } from '../../utils/types';
 
 const initialState: AppTypeInitialState = {
     toasts:[],

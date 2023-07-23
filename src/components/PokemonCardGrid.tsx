@@ -1,4 +1,4 @@
-import { pokemonTypeInterface, userPokemonsType } from "../utils/Types";
+import { pokemonTypeInterface, userPokemonsType } from "../utils/types";
 import {IoGitCompare} from 'react-icons/io5';
 import {FaPlus,FaTrash} from 'react-icons/fa';
 import {useLocation, useNavigate} from 'react-router-dom';
