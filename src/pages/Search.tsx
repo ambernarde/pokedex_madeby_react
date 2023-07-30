@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { getInitialPokemonData } from '../app/reducers/getInitialPokemonData';
-import { getPokemonData } from '../app/reducers/getPokemonData';
+import { getPokemonsData } from '../app/reducers/getPokemonsData';
 import PokemonCardGrid from '../components/PokemonCardGrid';
 import Wrapper from '../sections/Wrapper';
 import { debounce } from '../utils/debounce';
@@ -22,7 +22,7 @@ function Search() {
     const randomPokemonsId = clonedPokemons
     .sort(() => Math.random() - Math.random())
     .slice(0,20);
-    dispatch(getPokemonData(randomPokemonsId));
+    dispatch(getPokemonsData(randomPokemonsId));
   }
  },[allPokemon,dispatch]);
 
@@ -34,13 +34,13 @@ const handleChange = debounce((value:string) => getPokemon(value),300);
     const pokemons = allPokemon?.filter((pokemon) =>
         pokemon.name.includes(value.toLowerCase())    
     );
-    dispatch(getPokemonData(pokemons!));
+    dispatch(getPokemonsData(pokemons!));
   }else {
     const clonedPokemons = [...(allPokemon as [])];
     const randomPokemonsId = clonedPokemons
     .sort(()=> Math.random()- Math.random())
     .slice(0,20);
-    dispatch(getPokemonData(randomPokemonsId));
+    dispatch(getPokemonsData(randomPokemonsId));
   }
  }
 

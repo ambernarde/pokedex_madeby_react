@@ -1,4 +1,4 @@
-import { getPokemonData } from './../reducers/getPokemonData';
+import { getPokemonsData } from '../reducers/getPokemonsData';
 import { PokemonInitialStateType,  generatedPokemonType } from '../../utils/types';
 import { createSlice } from '@reduxjs/toolkit';
 import { getInitialPokemonData } from '../reducers/getInitialPokemonData';
@@ -37,7 +37,7 @@ export const PokemonSlice = createSlice({
         builder.addCase(getInitialPokemonData.fulfilled,(state,action) => {
             state.allPokemon = action.payload;
         });
-        builder.addCase(getPokemonData.fulfilled,(state,action) => {
+        builder.addCase(getPokemonsData.fulfilled,(state,action) => {
             state.randomPokemons= action.payload;
         });        
     },
