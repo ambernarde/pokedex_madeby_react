@@ -2,29 +2,39 @@ import { pokemonTypeInterface, userPokemonsType } from "../utils/types";
 import {IoGitCompare} from 'react-icons/io5';
 import {FaPlus,FaTrash} from 'react-icons/fa';
 import {useLocation, useNavigate} from 'react-router-dom';
-import { useDispatch } from "react-redux";
 import { addToCompare } from "../app/slices/PokemonSlice";
 import { setToast } from "../app/slices/AppSlice";
+import { addPokemonToList } from "../app/reducers/addPokemonToList";
+import { useAppDispatch } from "../app/hooks";
+import {removePokemonFromUserList} from "../app/reducers/removePokemonFromUserList";
 
 function PokemonCardGrid({pokemons} : {pokemons: userPokemonsType[]}){
     const location = useLocation();
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     return( <div className="pokemon-card-grid-container">
         <div className="pokemon-card-grid">
            {pokemons && 
             pokemons.length > 0 && 
             pokemons?.map((data: any) => {
+      
             return(
                 <div className="pokemon-card" key={data.id}>
                    <div className="pokemon-card-list">
                       {location.pathname.includes("/pokemon") || 
                        location.pathname.includes("/search") ? (
-                        <FaPlus className="plus" />
+                        <FaPlus 
+                         className="plus"                      
+                         onClick={() => dispatch(addPokemonToList(data))}
+                        />
                       ): location.pathname.includes("/search")? (
                         <FaPlus className="plus"/>
                       ): (
-                        <FaTrash className="trash"/>
+                        <FaTrash className="trash"
+                        onClick={async()=>
+                         await dispatch(removePokemonFromUserList({id: data.firebaseId!}))
+                        }
+                        />
                       )}
                    </div>
                    <div className="pokemon-card-compare">
