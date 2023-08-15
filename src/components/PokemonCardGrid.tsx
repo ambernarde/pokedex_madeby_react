@@ -31,17 +31,18 @@ function PokemonCardGrid({pokemons} : {pokemons: userPokemonsType[]}){
                         <FaPlus className="plus"/>
                       ): (
                         <FaTrash className="trash"
-                        onClick={async()=>
-                         await dispatch(removePokemonFromUserList({id: data.firebaseId!}))
-                        }
+                        onClick={async()=> {
+                          await dispatch(removePokemonFromUserList({id: data.firebaseId!}));
+                          dispatch(setToast("Pokemon removed successfully."));
+                        }}
                         />
                       )}
                    </div>
                    <div className="pokemon-card-compare">
                          <IoGitCompare  onClick={() => {
                             dispatch(addToCompare(data))
-                            dispatch(setToast(
-                                `${data.name} has been added to Compare Queue.`))
+                            dispatch(setToast(`${data.name} has been added to Compare Queue.`))
+                               
 
                          }}/>                         
                    </div>

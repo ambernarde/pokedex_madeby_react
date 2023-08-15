@@ -9,6 +9,7 @@ import {
   userPokemonsType,
 } from "../utils/types";
 import { removeFromCompare } from "../app/slices/PokemonSlice";
+import { addPokemonToList } from "../app/reducers/addPokemonToList";
 
 
 function CompareContainer({
@@ -147,7 +148,9 @@ function CompareContainer({
                     </div>
                 </div>
                 <div className="compare-action-buttons">
-                    <button className="compare-btn">Add</button>
+                    <button className="compare-btn"
+                     onClick={() => dispatch(addPokemonToList(pokemon))}
+                    >Add</button>
                     <button className="compare-btn"
                     onClick={() => navigate(`/pokemon/${pokemon.id}`)}
                     >View</button>

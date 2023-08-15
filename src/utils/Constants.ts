@@ -9,3 +9,4 @@ export const pokemonTabs = {
   locations: "locations",
   moves: "moves",
 };
+
