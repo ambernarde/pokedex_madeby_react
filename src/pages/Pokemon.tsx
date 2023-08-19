@@ -2,16 +2,22 @@
 import React, { useEffect, useCallback } from "react";
 import Wrapper from "../sections/Wrapper";
 import { useParams } from "react-router-dom";
-import { useAppDispatch } from "../app/hooks";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import axios from "axios";
-import { pokemonRoute, pokemonSpeciesRoute } from "../utils/constants";
+import { pokemonRoute, pokemonSpeciesRoute, pokemonTabs } from "../utils/constants";
 import { defaultImages, images } from "../utils/getPokemonImages";
 import { extractColors } from "extract-colors";
+import Description from "./PokemonsPages/Description";
+import Evolution from "./PokemonsPages/Evolution";
+import Location from "./PokemonsPages/Location";
+import CapableMoves from "./PokemonsPages/CapableMoves";
+import { setCurrentPokemon } from "../app/slices/PokemonSlice";
+
 
 function Pokemon() {
   const params = useParams();
   const dispatch = useAppDispatch();
-
+  const {currentPokemonTab} = useAppSelector(({app}) => app);
   const getRecursiveEvolution: any = useCallback(
     (evolutionChain: any, level: number, evolutionData: any) => {
       if (!evolutionChain.evolves_to.length) {
@@ -83,7 +89,7 @@ function Pokemon() {
       const evolutionLevel = evolution.find(
         ({ pokemon }) => pokemon.name === data.name
       ).level;
-      console.log({
+      dispatch(setCurrentPokemon({
         id: data.id,
         name: data.name,
         types: data.types.map(
@@ -106,9 +112,10 @@ function Pokemon() {
         evolutionLevel,
         evolution,
         pokemonAbilities,
-      });
+      })
+      );
     },
-    [getEvolutionData, params.id]
+    [getEvolutionData, params.id,dispatch]
   );
 
   useEffect(() => {
@@ -141,7 +148,14 @@ function Pokemon() {
     getPokemonInfo(imageElemet.src);
   }, [params, getPokemonInfo]);
 
-  return <div>Pokemon</div>;
+  return <div>
+    { currentPokemonTab === pokemonTabs.description && <Description/>}
+    {currentPokemonTab === pokemonTabs.evolution && <Evolution/>}
+    {currentPokemonTab === pokemonTabs.locations && <Location/>}
+    {currentPokemonTab === pokemonTabs.moves && <CapableMoves/>}
+    
+    
+    </div>;
 }
 
 export default Wrapper(Pokemon);

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../app/hooks";
 import { pokemonTypes } from "../utils";
 import {
-  pokemonStatsType,
+  pokemonStatType,
   pokemonTypeInterface,
   userPokemonsType,
 } from "../utils/types";
@@ -23,7 +23,7 @@ function CompareContainer({
   const dispatch = useAppDispatch();
   const createStatsArray = (
     types: pokemonTypeInterface[],
-    statType: pokemonStatsType
+    statType: pokemonStatType
   ) => {
     const statsArray: { name: string; image: string }[] = [];
     const statsSet = new Set<string>();
