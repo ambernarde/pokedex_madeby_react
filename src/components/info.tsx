@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { pokemonTypes } from "../utils";
+import { pokemonTypes } from "../utils/getPokemonTypes";
 import { useAppDispatch } from "../app/hooks";
 import { addPokemonToList } from "../app/reducers/addPokemonToList";
 import { setPokemonTab } from "../app/slices/AppSlice";
@@ -34,7 +34,7 @@ export default function Info({
     <>
       <div className="details">
         <h1 className="name">{data?.name}</h1>
-        <h3>Type: {data?.types.join(" - ")}</h3>        
+        <h3>Type: {data?.types.join(" - ")}</h3>
         <h3>Evolution: {data?.evolutionLevel}</h3>
         <button onClick={() => dispatch(setPokemonTab(pokemonTabs.evolution))}>
           See next evolution
@@ -58,37 +58,37 @@ export default function Info({
             <li>
               <span>Strengths:</span>
               <span>
-                {/* {createStatsArray(
+                {createStatsArray(
                   data?.types as unknown as string[],
                   "strength"
-                ).join(", ")} }
+                ).join(", ")}
               </span>
             </li>
             <li>
               <span>Weakness:</span>
               <span>
-                {/* {createStatsArray(
+                {createStatsArray(
                   data?.types as unknown as string[],
                   "weakness"
-                ).join(", ")} */}
+                ).join(", ")}
               </span>
             </li>
             <li>
               <span>Resistant:</span>
               <span>
-                {/* {createStatsArray(
+                {createStatsArray(
                   data?.types as unknown as string[],
                   "resistance"
-                ).join(", ")} */}
+                ).join(", ")}
               </span>
             </li>
             <li>
               <span>Vulnerable:</span>
               <span>
-                {/* {createStatsArray(
+                {createStatsArray(
                   data?.types as unknown as string[],
                   "vulnerable"
-                ).join(", ")} */}
+                ).join(", ")}
               </span>
             </li>
           </ul>
